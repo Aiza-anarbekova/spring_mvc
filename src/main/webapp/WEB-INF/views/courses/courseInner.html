@@ -1,0 +1,81 @@
+
+
+    <!DOCTYPE html>
+    <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:th="http://www.thymeleaf.org">
+    <head>
+
+        <meta charset="UTF-8">
+        <title>mvc</title>
+        <style>table,
+        td {
+            border: 1px solid #333;
+            margin-top: 200px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 25px;
+        }
+
+        thead,
+        tfoot {
+            background-color: rgba(34, 34, 34, 0.99);
+            color: #0da8ec;
+        }
+        </style>
+        <style>
+
+            table, th, td {
+                border: 1px solid #e1e733;
+                padding: 3px;
+
+
+            }
+        </style>
+    </head>
+    <body>
+    <table class="table table-bordered ">
+        <thead class="table-white">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Lesson name</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+            <th scope="col">More</th>
+
+        </tr>
+        </thead>
+        <tbody class="table-success">
+
+        <tr th:each="less : ${lessons}">
+            <td th:text="${less.id}"></td>
+            <td th:text="${less.lessonName}"></td>
+
+            <td>
+                <a th:href="@{/lesson/{id}/edit(id=${less.getId()})}">
+                    <button style="height: 40px; width: 80px; background-color:whitesmoke;">update</button>
+                </a>
+            </td>
+
+            <td>
+                <form th:method="DELETE" th:action="@{/lesson/{id}/{courseId}/delete(id=${less.getId()},courseId=${course})}">
+                    <button style="height: 40px; width: 80px; background-color:whitesmoke;">delete</button></a>
+                </form></td>
+
+            <td>
+                <a th:href="@{/tasks/allTasks/{id}(id=${less.getId()})}">
+                    <button style="height: 40px; width: 80px; background-color:whitesmoke;">More</button>
+                </a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+
+    <br><br><br><br>
+    <div style = "text-align:center; ">
+        <a th:href="@{/lesson/{id}/new(id=${course})}">
+            <button style = "font-size:30px;">Add lesson</button></a></div>
+
+    </body>
+</html>

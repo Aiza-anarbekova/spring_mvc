@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<style>table,
+td {
+    border: 1px solid #333;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 15px;
+}
+
+thead,
+tfoot {
+    background-color: #f8c3fc;
+    color: #0a000e;
+}
+</style>
+<style>
+    table, th, td {
+        border: 1px solid #dfc2fc;
+        padding: 3px;
+    }
+</style>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">Deadline</th>
+        <th scope="col">Task Name</th>
+        <th scope="col">Task Text</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="task:${task}">
+        <th th:text="${task.id}"></th>
+        <th th:text="${task.deadline}"></th>
+        <th th:text="${task.name}"></th>
+        <th th:text="${task.task}"></th>
+        <td>
+            <a th:href="@{/tasks/{taskId}/edit(taskId=${task.getId()})}">
+                <button style="height: 40px; width: 80px; background-color:#f6b4d9;">update</button>
+            </a>
+        </td>
+        </td>
+        <td>
+            <form th:method="DELETE" th:action="@{/tasks/{taskId}/{lessonId}/delete(taskId=${task.getId()},lessonId=${lesson})}">
+                <button style="height: 40px; width: 80px; background-color:whitesmoke;">delete</button></a>
+            </form></td>
+    </tr>
+    </tbody>
+</table>
+<div style = "text-align:center; ">
+<a th:href="@{/tasks/{id}/newTask(id=${lesson})}">
+    <button style = "font-size:30px;">Add task</button>
+</a></div>
+
+
+<table class="table table-bordered ">
+    <thead class="table-white">
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">video name</th>
+        <th scope="col">link </th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+
+    </tr>
+    </thead>
+    <tbody class="table-success">
+
+    <tr th:each="video : ${videos}">
+        <td th:text="${video.id}"></td>
+        <td th:text="${video.videoName}"></td>
+        <td th:text="${video.link}"></td>
+
+        <td>
+            <a th:href="@{/video/{id}/edit(id=${video.getId()})}">
+                <button style="height: 40px; width: 80px; background-color:whitesmoke;">update</button>
+            </a>
+        </td>
+
+        <td>
+            <form th:method="DELETE" th:action="@{/video/{id}/{lessonId}/delete(id=${video.getId()},lessonId=${lesson})}">
+                <button style="height: 40px; width: 80px; background-color:whitesmoke;">delete</button></a>
+            </form></td>
+
+    </tr>
+    </tbody>
+</table>
+
+
+<br><br><br><br>
+<div style = "text-align:center; ">
+    <a th:href="@{/video/{id}/new(id=${lesson})}">
+        <button style = "font-size:30px;">Add video</button>
+    </a></div>
+
+
+</body>
+</html>

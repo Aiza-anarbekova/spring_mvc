@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8">
+    <title>mvc</title>
+    <style>table,
+    td {
+        border: 1px solid #333;
+        margin-top: 200px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 25px;
+    }
+
+    thead,
+    tfoot {
+        background-color: #222;
+        color: #fff;
+    }
+    </style>
+    <style>
+
+        table, th, td {
+            border: 1px solid cadetblue;
+            padding: 3px;
+
+
+        }
+    </style>
+</head>
+<body>
+<table class="table table-bordered ">
+    <thead class="table-white">
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Course name</th>
+        <th scope="col">description</th>
+        <th scope="col">duration</th>
+        <th scope="col">date of start</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+        <th scope="col" style="color:beige">MORE</th>
+        <th scope="col" style="color:beige">select</th>
+        <th scope="col" style="color:beige">assign</th>
+    </tr>
+    </thead>
+    <tbody class="table-success">
+    <tr th:each="course : ${allCourses}">
+        <td th:text="${course.id}"></td>
+        <td th:text="${course.name}"></td>
+        <td th:text="${course.duration}"></td>
+        <td th:text="${course.description}"></td>
+        <td th:text="${course.dateOfStart}"></td>
+
+        <td>
+            <a th:href="@{/courses/{id}/edit(id=${course.getId()})}">
+            <button style="height: 40px; width: 80px; background-color:whitesmoke;">update</button>
+        </a>
+        </td>
+        <td>
+            <form th:method="DELETE" th:action="@{/courses/{id}/{companyId}/delete(id=${course.getId()},companyId=${companyId})}">
+            <button style="height: 40px; width: 80px; background-color:whitesmoke;">delete</button></a>
+                        </form></td>
+        <td>
+        <a th:href="@{/students/allStudents/{id}(id=${course.getId()})}">
+            <button style="height: 40px; width: 90px; background-color:paleturquoise;">MORE</button>
+        </a>
+        </td>
+<td>
+        <td>
+            <form th:method="POST"
+                  th:action="@{/courses/{companyId}/{courseId}/saveAssign(courseId=${course.getId()}, companyId=${companyId})}">
+                <select name="instructor" class="form-select form-select-sm"  aria-label=".form-select-sm example" th:object="${inst}" th:field="*{id}">
+                    <option th:each="instructor : ${instructors}"
+                            th:value="${instructor.id}"
+                            th:text="${instructor.firstName}">
+                    </option>
+                </select>
+                <input type="submit" value="submit" style="height: 30px;width: 60px; background: azure"/>
+            </form>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+<br><br><br><br>
+<div style = "text-align:center; ">
+    <a th:href="@{/courses/{id}/new(id=${companyId})}">
+        <button style = "font-size:30px;">Add course</button></a></div>
+
+
+
+<table class="table table-bordered ">
+    <thead class="table-white">
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">First name</th>
+        <th scope="col">Last name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone number</th>
+        <th scope="col">Specialization</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+
+    </tr>
+    </thead>
+    <tbody class="table-success">
+
+    <tr th:each="instructor : ${instructors}">
+        <td th:text="${instructor.id}"></td>
+        <td th:text="${instructor.firstName}"></td>
+        <td th:text="${instructor.lastName}"></td>
+        <td th:text="${instructor.email}"></td>
+        <td th:text="${instructor.phoneNumber}"></td>
+        <td th:text="${instructor.specialization}"></td>
+
+        <td>
+            <a th:href="@{/instructors/{id}/edit(id=${instructor.getId()})}">
+                <button style="height: 40px; width: 80px; background-color:whitesmoke;">update</button>
+            </a>
+        </td>
+        <td>
+            <form th:method="DELETE" th:action="@{/instructors/{id}/{companyId}/delete(id=${instructor.getId()},companyId=${companyId})}">
+            <button style="height: 40px; width: 80px; background-color:whitesmoke;">delete</button></a>
+        </form></td>
+
+    </tr>
+    </tbody>
+</table>
+
+
+<br><br><br><br>
+<div style = "text-align:center; ">
+    <a th:href="@{/instructors/{id}/new(id=${companyId})}">
+        <button style = "font-size:30px;">Add instructor</button></a></div>
+
+
+
+
+<table class="table table-bordered ">
+    <thead class="table-white">
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">First name</th>
+        <th scope="col">Last name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone number</th>
+        <th scope="col">Study format</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+
+    </tr>
+    </thead>
+    <tbody class="table-success">
+
+    <tr th:each="student : ${students}">
+        <td th:text="${student.id}"></td>
+        <td th:text="${student.firstName}"></td>
+        <td th:text="${student.lastName}"></td>
+        <td th:text="${student.email}"></td>
+        <td th:text="${student.phoneNumber}"></td>
+        <td th:text="${student.studyFormat}"></td>
+
+        <td>
+            <a th:href="@{/students/{id}/edit(id=${student.getId()})}">
+                <button style="height: 40px; width: 80px; background-color:whitesmoke;">update</button>
+            </a>
+        </td>
+
+        <td>
+            <form th:method="DELETE" th:action="@{/students/{id}/{companyId}/delete(id=${student.getId()},companyId=${companyId})}">
+                <button style="height: 40px; width: 80px; background-color:whitesmoke;">delete</button></a>
+            </form></td>
+
+    </tr>
+    </tbody>
+</table>
+
+
+<br><br><br><br>
+<div style = "text-align:center; ">
+    <a th:href="@{/students/{id}/new(id=${companyId})}">
+        <button style = "font-size:30px;">Add student</button></a></div>
+
+</body>
+</html>
+
+
+

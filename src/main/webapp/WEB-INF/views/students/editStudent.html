@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update course</title>
+</head>
+<body>
+<form
+        action="#"
+        th:action="@{/students/{id}/{comId}/update(id=${student.id},comId=${comId})}"
+        th:object="${student}"
+        method="patch"
+        style="text-align:center; margin-top:200px; font-size: 30px;">
+
+    <input type="hidden" name = "id" th:field="*{id}">
+    <input type="text"  name="courseName" th:field="*{firstName}" placeholder="first Name">
+    <br><br>
+    <input type="text"  name="durationInMonth" th:field="*{lastName}" placeholder="last name">
+    <br><br>
+    <input type="text"  name="durationInMonth" th:field="*{email}" placeholder="email">
+    <br><br>
+    <input type="text"  name="durationInMonth" th:field="*{phoneNumber}" placeholder="phone number">
+    <br><br>
+    <input type="text"  name="durationInMonth" th:field="*{studyFormat}" placeholder="studyFormat">
+
+
+    <input type="submit" value="Update">
+</form>
+</body>
+</html>
